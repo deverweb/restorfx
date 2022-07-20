@@ -58,8 +58,8 @@ export default {
       formData.append('name', values.name)
       formData.append('phone', values.phone)
       actions.resetForm();
-      fetch(`http://sub.restor.server/wp-admin/admin-ajax.php?action=restormail`, {
-      // fetch("https://admin.restor-chicago.com/wp-admin/admin-ajax.php?action=restormail", {
+      // fetch(`http://sub.restor.server/wp-admin/admin-ajax.php?action=restormail`, {
+      fetch("https://admin.restor-chicago.com/wp-admin/admin-ajax.php?action=restormail", {
         method: 'POST',
         body: formData
       })

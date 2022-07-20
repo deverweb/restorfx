@@ -103,41 +103,46 @@
             back
           </div>
         </button>
-        <!-- <div class="about-wrapper about-wrapper__1" > -->
-          <div class="animated animated__about-subtitle">
-            <div class="about-subtitle" v-html="wpData.about_subtitle"></div>
+
+        <div class="animated animated__about-subtitle">
+          <div class="about-subtitle" v-html="wpData.about_subtitle"></div>
+        </div>
+        <div class="animated animated__about-title">
+
+          <div class="about-title " v-html="wpData.about_title"></div>
+        </div>
+
+        <div class="about-text">
+          <div class="animated animated__about-text-1">
+            <p class="text-1" v-html="wpData.about_text_1">
+
+            </p>
+
           </div>
-          <div class="animated animated__about-title">
+          <div class="animated animated__about-text-2" >
+          <p class="text-2" v-html="wpData.about_text_2">
 
-            <div class="about-title " v-html="wpData.about_title"></div>
+          </p>
           </div>
-          <!-- <div class="animated"> -->
-            <div class="about-text">
-              <div class="animated animated__about-text-1">
-                <p class="text-1" v-html="wpData.about_text_1">
 
-                </p>
+        </div>
+        
+        <div class="about-certificates  notshow">
+          <div class="about-certificate " v-for="cert, i in wpData.feedback_certificates" :key="i" @click="openLightboxOnSlide(i)">
+            <img :src="cert.image.url" alt="Certificate">
+           </div>
+         
+        </div>
 
-              </div>
-              <div class="animated animated__about-text-2" >
-              <p class="text-2" v-html="wpData.about_text_2">
-
-              </p>
-              </div>
-
-            </div>
-
-          <!-- </div> -->
-          <div class="about-video notshow" @click="showVideo = true">
-            <div class="about-video-icon">
-              <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M32 28L47 37L32 46V28Z" fill="white"/>
-                <circle cx="37" cy="37" r="36" stroke="#FFC700" stroke-width="2"/>
-              </svg>
-            </div>
-            <div class="about-video-text">WATCH VIDEO PRESENTATION</div>
+        <div class="about-video notshow" @click="showVideo = true">
+          <div class="about-video-icon">
+            <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 28L47 37L32 46V28Z" fill="white"/>
+              <circle cx="37" cy="37" r="36" stroke="#FFC700" stroke-width="2"/>
+            </svg>
           </div>
-        <!-- </div> -->
+          <div class="about-video-text">WATCH VIDEO PRESENTATION</div>
+        </div>
 
 
       </section>
@@ -311,17 +316,7 @@
           <PrimaryButton @click="showPopup = true">Get in touch</PrimaryButton>
         </div>
         <div class="feedback-right">
-          <!-- <div class="feedback-certificates">
-            <swiper class="swiper feedback-certificates-slider" :slides-per-view="'auto'" :space-between="83" :modules="modules" :breakpoints="certificatesSliderSwiperBreakpoints">
-              <swiper-slide v-for="cert, i in wpData.feedback_certificates" :key="i" class="feedback-certificates-slide">
 
-                <img :src="cert.image.url" alt="Certificate">
-
-              </swiper-slide>
-
-
-            </swiper>
-          </div> -->
           <div class="feedback-reviews">
             <swiper class="swiper feedback-reviews-slider" :slides-per-view="'2'" :space-between="76" :modules="modules" :navigation="{nextEl: '.feedback-arrows-item__right', prevEl: '.feedback-arrows-item__left'}" >
               <swiper-slide v-for="review, i in desktopReviewsSlider" :key="i" class="feedback-reviews-slide">
@@ -533,152 +528,138 @@
       <section id="services" class="services">
         <h2 class="services-subtitle subtitle">OUR SERVICES</h2>
         <div class="services-slider">
-          <div class="services-slider-navi">
-            <button class="services-slider-arrow services-slider-arrow__left">
-              <svg width="52" height="24" viewBox="0 0 52 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.3593 23.4348L16.6997 21.5344L6.32012 13.0633L51.8911 13.0633L51.8911 10.3715L6.32012 10.3715L16.6997 1.90044L14.3593 2.91438e-05L-0.00018971 11.7174L14.3593 23.4348Z" fill="#FFC700"/>
-              </svg>
-            </button>
-            <button class="services-slider-arrow services-slider-arrow__right">
-              <svg width="52" height="24" viewBox="0 0 52 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M37.6407 0.000244141L35.3003 1.90065L45.6799 10.3717H0.108887V13.0635H45.6799L35.3003 21.5346L37.6407 23.435L52.0002 11.7176L37.6407 0.000244141Z" fill="#FFC700"/>
-              </svg>
-            </button>
+          <div  class="slide services-slide services-slide__restorfx">
+            <div class="services-slide-title">
+              Restor fx
+            </div>
+            <p class="services-slide-text text">{{wpData.restorfx_text}}</p>
+            <div class="services-car car  services-car__restorfx">
+              <div class="car-images">
+                <img class="car-images-image car-images-image__full" src="@/assets/img/car_main/clear_car.png"  alt="Car"/>
+                <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_restorfx_services" :key="i" :src="service.image" alt="Car">
+              </div>
+              <div class="car-services">
+                <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_restorfx_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_restorfx_services)">
+                  <div class="service-item">
+                    <div class="service-item-icon">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
+                      <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
+                      <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
+                      <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
+                    </svg>
+
+
+
+                    </div>
+                    <div class="service-item-text">
+                      <div class="service-item-wrapper">
+                        <div class="service-item-sub">{{service.subtitle}}</div>
+                        <div class="service-item-title">{{service.title}}</div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Features class="services-slide-features" :features="wpData.restorfx_features"></Features>
           </div>
-          <swiper class="swiper services-slider" :space-between="50" :allow-touch-move="false" :slides-per-view="1"  :modules="modules" :navigation="{nextEl: '.services-slider-arrow__right', prevEl: '.services-slider-arrow__left'}" >
-            <!-- <div> -->
-            <swiper-slide  class="slide services-slide services-slide__restorfx">
-              <div class="services-slide-title">
-                Restor fx
+          <div  class="slide services-slide services-slide__clearfx">
+            <div class="services-slide-title">
+              Clearfx
+            </div>
+            <p class="services-slide-text text">{{wpData.clearfx_text}}</p>
+            <div class="services-car car  services-car__clearfx">
+              <!-- <img class="services-car__clearfx-under" :src="'./assets/img/services/clearfx_under.png'" alt=""> -->
+              <div class="car-images-compare" ref="mobilecompare">
+                <img :src="services_clearfx_services[1].image" alt="" />
+                <img :src="services_clearfx_services[0].image" alt="" />
               </div>
-              <p class="services-slide-text text">{{wpData.restorfx_text}}</p>
-              <div class="services-car car  services-car__restorfx">
-                <div class="car-images">
-                  <img class="car-images-image car-images-image__full" src="@/assets/img/car_main/clear_car.png"  alt="Car"/>
-                  <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_restorfx_services" :key="i" :src="service.image" alt="Car">
-                </div>
-                <div class="car-services">
-                  <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_restorfx_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_restorfx_services)">
-                    <div class="service-item">
-                      <div class="service-item-icon">
-                      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
-                        <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
-                        <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
-                        <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
-                      </svg>
 
-
-
-                      </div>
-                      <div class="service-item-text">
-                        <div class="service-item-wrapper">
-                          <div class="service-item-sub">{{service.subtitle}}</div>
-                          <div class="service-item-title">{{service.title}}</div>
-
-                        </div>
+            </div>
+            <Features class="services-slide-features" :features="wpData.clearfx_features"></Features>
+          </div>
+          <div  class="slide services-slide services-slide__pdr">
+            <div class="services-slide-title">
+              Pdr
+            </div>
+            <p class="services-slide-text text">{{wpData.pdr_text}}</p>
+            <div class="services-car car  services-car__pdr">
+              <div class="car-images">
+                <img class="car-images-image car-images-image__full" :src="'./assets/img/services/pdr_full.png'"  alt="Car"/>
+                <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_pdr_services" :key="i" :src="service.image" alt="Car">
+              </div>
+              <div class="car-services">
+                <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_pdr_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_pdr_services)">
+                  <div class="service-item">
+                    <div class="service-item-icon">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
+                      <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
+                      <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
+                      <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
+                    </svg>
+                    </div>
+                    <div class="service-item-text">
+                      <div class="service-item-wrapper">
+                        <div class="service-item-sub">{{service.subtitle}}</div>
+                        <div class="service-item-title">{{service.title}}</div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <Features class="services-slide-features" :features="wpData.restorfx_features"></Features>
-            </swiper-slide>
-            <swiper-slide  class="slide services-slide services-slide__clearfx">
-              <div class="services-slide-title">
-                Clearfx
+            </div>
+            <Features class="services-slide-features" :features="wpData.pdr_features"></Features>
+          </div>
+          <div  class="slide services-slide services-slide__ppf">
+            <div class="services-slide-title">
+              ppf
+            </div>
+            <p class="services-slide-text text">{{wpData.ppf_text}}</p>
+            <div class="services-car car  services-car__ppf">
+              <div class="car-images">
+                <img class="car-images-image car-images-image__full" :src="'./assets/img/services/ppf_full.png'"  alt="Car"/>
               </div>
-              <p class="services-slide-text text">{{wpData.clearfx_text}}</p>
-              <div class="services-car car  services-car__clearfx">
-                <!-- <img class="services-car__clearfx-under" :src="'./assets/img/services/clearfx_under.png'" alt=""> -->
-                <div class="car-images-compare" ref="mobilecompare">
-                  <img :src="services_clearfx_services[1].image" alt="" />
-                  <img :src="services_clearfx_services[0].image" alt="" />
+            </div>
+            <Features class="services-slide-features" :features="wpData.ppf_features"></Features>
+          </div>
+          <div  class="slide services-slide services-slide__dynoflex">
+            <div class="services-slide-title">
+              Dynoflex
+            </div>
+            <p class="services-slide-text text">{{wpData.dynoflex_text}}</p>
+            <div class="services-car car  services-car__dynoflex">
+              <div class="car-images">
+                <img class="car-images-image car-images-image__full" :src="'./assets/img/services/dynoflex_full.png'"  alt="Car"/>
+                <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_dynoflex_services" :key="i" :src="service.image" alt="Car">
+              </div>
+              <div class="car-services">
+                <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_dynoflex_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_dynoflex_services)">
+                  <div class="service-item">
+                    <div class="service-item-icon">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
+                      <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
+                      <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
+                      <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
+                    </svg>
+                    </div>
+                    <div class="service-item-text">
+                      <div class="service-item-wrapper">
+                        <div class="service-item-sub">{{service.subtitle}}</div>
+                        <div class="service-item-title">{{service.title}}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <Features class="services-slide-features" :features="wpData.dynoflex_features"></Features>
+          </div>
 
-              </div>
-              <Features class="services-slide-features" :features="wpData.clearfx_features"></Features>
-            </swiper-slide>
-            <swiper-slide  class="slide services-slide services-slide__pdr">
-              <div class="services-slide-title">
-                Pdr
-              </div>
-              <p class="services-slide-text text">{{wpData.pdr_text}}</p>
-              <div class="services-car car  services-car__pdr">
-                <div class="car-images">
-                  <img class="car-images-image car-images-image__full" :src="'./assets/img/services/pdr_full.png'"  alt="Car"/>
-                  <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_pdr_services" :key="i" :src="service.image" alt="Car">
-                </div>
-                <div class="car-services">
-                  <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_pdr_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_pdr_services)">
-                    <div class="service-item">
-                      <div class="service-item-icon">
-                      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
-                        <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
-                        <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
-                        <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
-                      </svg>
-                      </div>
-                      <div class="service-item-text">
-                        <div class="service-item-wrapper">
-                          <div class="service-item-sub">{{service.subtitle}}</div>
-                          <div class="service-item-title">{{service.title}}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Features class="services-slide-features" :features="wpData.pdr_features"></Features>
-            </swiper-slide>
-            <swiper-slide  class="slide services-slide services-slide__ppf">
-              <div class="services-slide-title">
-                ppf
-              </div>
-              <p class="services-slide-text text">{{wpData.ppf_text}}</p>
-              <div class="services-car car  services-car__ppf">
-                <div class="car-images">
-                  <img class="car-images-image car-images-image__full" :src="'./assets/img/services/ppf_full.png'"  alt="Car"/>
-                </div>
-              </div>
-              <Features class="services-slide-features" :features="wpData.ppf_features"></Features>
-            </swiper-slide>
-            <swiper-slide  class="slide services-slide services-slide__dynoflex">
-              <div class="services-slide-title">
-                Dynoflex
-              </div>
-              <p class="services-slide-text text">{{wpData.dynoflex_text}}</p>
-              <div class="services-car car  services-car__dynoflex">
-                <div class="car-images">
-                  <img class="car-images-image car-images-image__full" :src="'./assets/img/services/dynoflex_full.png'"  alt="Car"/>
-                  <img :class="'car-images-image car-image ' + service.dataName " :data-serviceImage="service.dataName" v-for="service, i in services_dynoflex_services" :key="i" :src="service.image" alt="Car">
-                </div>
-                <div class="car-services">
-                  <div :class="`service car-service car-service__restorfx car-service__${service.dataName}`"   v-for="service,i in services_dynoflex_services" :key="i" :data-service="service.dataName" @click="hideServiceCarImage(service.dataName, $event, services_dynoflex_services)">
-                    <div class="service-item">
-                      <div class="service-item-icon">
-                      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect class="inner-box" x="32.5" y="13.7952" width="26.45" height="26.45" transform="rotate(45 32.5 13.7952)" stroke="#FFC700" stroke-width="1.15" stroke-dasharray="8.05 11.5"/>
-                        <rect class="inner-rect" opacity="0.36" x="32.5" y="21.9314" width="14.95" height="14.95" transform="rotate(45 32.5 21.9314)" fill="#FFC700"/>
-                        <rect :class="  {'active': service.isServiceHovering}" class="outer-box"   x="32.436" y="2" width="43.0428" height="43.0428" transform="rotate(45 32.436 2)" stroke="#FFC700" stroke-width="1.59418" stroke-dasharray="13.22 18.88"/>
-                        <rect :class=" {'active': service.isServiceHovering}" class="outer-rect"  x="32.436" y="23.4177" width="12.7534" height="12.7534" transform="rotate(45 32.436 23.4177)" fill="#FFC700"/>
-                      </svg>
-                      </div>
-                      <div class="service-item-text">
-                        <div class="service-item-wrapper">
-                          <div class="service-item-sub">{{service.subtitle}}</div>
-                          <div class="service-item-title">{{service.title}}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Features class="services-slide-features" :features="wpData.dynoflex_features"></Features>
-            </swiper-slide>
-            <!-- </div> -->
-          </swiper>
+
 
         </div>
         <MobileButton @click="showPopup = true"  class="services-btn">Get in touch</MobileButton>
@@ -968,6 +949,12 @@
         </div>
       </div>
     </transition>
+     <FsLightbox
+      
+      :slide="slide"
+      :toggler="toggler"
+      :sources="certificates"
+    />
   </div>
 
 </template>
@@ -976,9 +963,9 @@
   import gsap from "gsap";
   import { Navigation } from 'swiper'
   import ImageCompare from "image-compare-viewer";
-
   import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
   import {Form, Field, ErrorMessage} from 'vee-validate'
+  import FsLightbox from 'fslightbox-vue/v3';
   import 'swiper/swiper-bundle.min.css'
   import NavBar from '@/components/Header/NavBar/NavBar.vue'
   import Logo from '@/components/Header/Logo/Logo.vue'
@@ -1018,8 +1005,10 @@ export default {
     Field,
     ErrorMessage,
     RestorForm,
+    FsLightbox
   },
   data: () => ({
+    slide: 1,
     wpData: {
 
 
@@ -1126,7 +1115,14 @@ export default {
     }
 
     },
+    certificates: [
+      './assets/img/cert/cert_1.png',
+      './assets/img/cert/cert_2.png',
+      './assets/img/cert/cert_3.png',
+      './assets/img/cert/cert_4.png'
+    ],
     isFetching: true,
+    toggler: false,
     prevSlide: null,
     currentSlide: 1,
     canAnimateSlide: true,
@@ -1366,6 +1362,8 @@ export default {
     },
   }),
   mounted() {
+    
+
     new ImageCompare(this.$refs.compare, {
       // controlColor: "#FFFFFF",
       // addCircle: false,
@@ -1499,6 +1497,7 @@ export default {
       .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=1.25')
       .fromTo('.home-container .about-return', {x: 100, autoAlpha: 0},{duration: 1.5, autoAlpha: 1, x: 0}, '-=1.75')
       .set('.home-container .offer', {zIndex: 0})
+      .fromTo('.home-container .about-certificates',{autoAlpha: 0}, {duration: 1, autoAlpha: 1}, '-=1' )
       .fromTo('.home-container .about-video', {y: 100, autoAlpha: 0},{duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
           this.canAnimateSlide = true
       }}, '-=1.25')
@@ -1563,6 +1562,7 @@ export default {
         .to('.animated__about-text-2',{duration: 2, autoAlpha: 0, maxWidth: '0px', ease:'Expo.easeInOut'}, '-=2')
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=2')
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=2')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=2' )
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=2')
 
         .to('.slide .offer-sub', {duration: 1, x: 0, autoAlpha: 1}, '-=1')
@@ -1591,16 +1591,14 @@ export default {
         .to('.animated__about-text-2',{duration: 2, autoAlpha: 0, maxWidth: '0px', ease:'Expo.easeInOut'}, '-=2')
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=1')
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=1')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=1' )
         .fromTo('.home-container .choose-car',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1} )
         .fromTo('.home-container .choose-subtitle',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1}, '-=1' )
         .fromTo('.home-container .choose-text',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1}, '-=1' )
-        .fromTo('.home-container .choose-btn',{y: 200, autoAlpha: 0}, {duration: 1, autoAlpha: 1, y: 0}, '-=1')
-        .fromTo('.home-container .choose-values',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1, onComplete: () => {
+        .fromTo('.home-container .choose-btn',{y: 200, autoAlpha: 0}, {duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
           this.canAnimateSlide = true
+        }}, '-=1')
 
-        }, onReverseComplete: () => {
-              this.canAnimateSlide = true
-          }}, '-=1' )
 
 
        this.timeline_2_4 //From Choose 3 slide (About 2nd) To Services 4 slide(1st RestorFX)
@@ -1613,6 +1611,7 @@ export default {
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=2')
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=2')
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=2')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=2' )
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=1.5')
 
         .to('.home-container .services-left', {duration: 1, autoAlpha: 1}, '-=0.5')
@@ -1630,6 +1629,7 @@ export default {
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=2')
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=2')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=2' )
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=1.5')
 
 
@@ -1643,6 +1643,7 @@ export default {
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=2')
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=2')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=2' )
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=1.5')
 
 
@@ -1658,7 +1659,6 @@ export default {
         .to('.home-container .choose-subtitle', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-text', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-btn', {duration: 1, autoAlpha: 0, y: 200}, '-=1')
-        .to('.home-container .choose-values', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1')
 
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.slide .offer-sub', {duration: 1, x: 0, autoAlpha: 1}, )
@@ -1681,12 +1681,12 @@ export default {
         .to('.home-container .choose-subtitle',{duration: 1, scale: 0.8, autoAlpha: 0}, '-=1' )
         .to('.home-container .choose-text',{duration: 1, scale: 0.8, autoAlpha: 0}, '-=1' )
         .to('.home-container .choose-btn',{y: 200, autoAlpha: 0}, '-=1')
-        .to('.home-container .choose-values',{duration: 1, scale: 0.8, autoAlpha: 0}, '-=1' )
         .to('.animated__about-subtitle', {duration: 2, autoAlpha: 1, maxWidth: '220px', ease:'Expo.easeInOut'}, '-=1')
         .to('.animated__about-title', {duration: 2, autoAlpha: 1, maxWidth: '738px', ease:'Expo.easeInOut'}, '-=2')
         .to('.animated__about-text-1', {duration: 2, autoAlpha: 1, maxWidth: '383px', ease:'Expo.easeInOut'}, '-=2')
         .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
         .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=1')
+        .to('.home-container .about-certificates',{duration: 1.5, autoAlpha: 1}, '-=1.5' )
         .to('.home-container .about-return',{duration: 1.5, autoAlpha: 1, x: 0}, '-=1.5')
         .fromTo('.home-container .about-video', {y: 100, autoAlpha: 0},{duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
             this.canAnimateSlide = true
@@ -1698,7 +1698,6 @@ export default {
         .to('.home-container .choose-subtitle', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-text', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-btn', {duration: 1, autoAlpha: 0, y: 200}, '-=1')
-        .to('.home-container .choose-values', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1')
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=0.5')
 
@@ -1717,7 +1716,6 @@ export default {
         .to('.home-container .choose-subtitle', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-text', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-btn', {duration: 1, autoAlpha: 0, y: 200}, '-=1')
-        .to('.home-container .choose-values', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1')
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=0.5')
 
@@ -1728,7 +1726,6 @@ export default {
         .to('.home-container .choose-subtitle', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-text', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1' )
         .to('.home-container .choose-btn', {duration: 1, autoAlpha: 0, y: 200}, '-=1')
-        .to('.home-container .choose-values', {duration: 1, autoAlpha: 0, scale: 0.8}, '-=1')
         .to('.home-container .about-return',{duration: 1, autoAlpha: 0, x: 100}, '-=1')
         .to('.home-container .car__tesla', {duration: 1.75, xPercent: -250, ease:'Expo.easeInOut'}, '-=0.5')
 
@@ -1780,6 +1777,8 @@ export default {
         .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
         .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
         .fromTo('.home-container .about-return', {x: 100, autoAlpha: 0},{duration: 1.5, autoAlpha: 1, x: 0}, '-=1.5')
+
+        .to('.home-container .about-certificates',{duration: 1.5, autoAlpha: 1}, '-=1.5' )
         .fromTo('.home-container .about-video', {y: 100, autoAlpha: 0},{duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
             this.canAnimateSlide = true
         }}, '-=1.25')
@@ -1801,14 +1800,14 @@ export default {
 
         .to('.home-container .about-bg', {duration: 1, autoAlpha: 0}, '-=1')
         .to('.home-container .about-return',{duration: 1, autoAlpha: 1, x: 0}, '-=1')
+        .to('.home-container .about-certificates',{duration: 1, autoAlpha: 0}, '-=1' )
         .to('.home-container .about-video', {duration: 1, autoAlpha: 0, y: 100}, '-=1')
         .fromTo('.home-container .choose-car',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1}, '-=1.2' )
         .fromTo('.home-container .choose-subtitle',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1}, '-=1.2' )
         .fromTo('.home-container .choose-text',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1}, '-=1.2' )
-        .fromTo('.home-container .choose-btn',{y: 200, autoAlpha: 0}, {duration: 1, autoAlpha: 1, y: 0}, '-=1.2')
-        .fromTo('.home-container .choose-values',{scale: 0.8, autoAlpha: 0}, {duration: 1, autoAlpha: 1, scale: 1, onComplete: () => {
+        .fromTo('.home-container .choose-btn',{y: 200, autoAlpha: 0}, {duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
           this.canAnimateSlide = true
-        }}, '-=1.2' )
+        }}, '-=1.2')
 
 
 
@@ -1910,9 +1909,10 @@ export default {
           .set('.home-container .services-item__clearfx', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
           .fromTo('.home-container .about-return', {x: 100, autoAlpha: 0},{duration: 1.5, autoAlpha: 1, x: 0}, '-=1.5')
+          .to('.home-container .about-certificates',{duration: 1.5, autoAlpha: 1}, '-=1.5' )
           .fromTo('.home-container .about-video', {y: 100, autoAlpha: 0},{duration: 1, autoAlpha: 1, y: 0, onComplete: () => {
               this.canAnimateSlide = true
-          }}, '-=1.25')
+          }}, '-=1')
 
       this.timeline_5_4
         .to('.home-container .services-items-wrapper', {duration: 1, y: 70})
@@ -2028,7 +2028,7 @@ export default {
           .to('.animated__about-text-1', {duration: 2, autoAlpha: 1, maxWidth: '383px', ease:'Expo.easeInOut'}, '-=2')
           .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
           .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
-
+          .to('.home-container .about-certificates',{duration: 1, autoAlpha: 1}, '-=2' )
           .set('.home-container .services-items-wrapper', {y: 70})
           .set('.home-container .services-item__pdr', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2163,6 +2163,7 @@ export default {
           .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
           .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
 
+          .to('.home-container .about-certificates',{duration: 1, autoAlpha: 1}, '-=2' )
           .set('.home-container .services-items-wrapper', {y: 70})
           .set('.home-container .services-item__ppf', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2297,6 +2298,7 @@ export default {
         .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
         .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
 
+          .to('.home-container .about-certificates',{duration: 1, autoAlpha: 1}, '-=2' )
         .set('.home-container .services-items-wrapper', {y: 70})
         .set('.home-container .services-item__dynoflex', {opacity: 0.2, scale: 1})
         .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2396,6 +2398,7 @@ export default {
           .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
           .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
 
+          .to('.home-container .about-certificates',{duration: 1.5, autoAlpha: 1}, '-=1.5' )
           .set('.home-container .services-items-wrapper', {y: 70})
           .set('.home-container .services-item__dynoflex', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2485,6 +2488,7 @@ export default {
           .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
           .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
 
+          .to('.home-container .about-certificates',{duration: 1, autoAlpha: 1}, '-=2' )
           .set('.home-container .services-items-wrapper', {y: 70})
           .set('.home-container .services-item__dynoflex', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2552,6 +2556,7 @@ export default {
           .to('.animated__about-text-2', {duration: 2, autoAlpha: 1, maxWidth: '292px', ease:'Expo.easeInOut'}, '-=2')
           .to('.home-container .about-bg', {duration: 1.5, autoAlpha: 1}, '-=2')
 
+          .to('.home-container .about-certificates',{duration: 1.5, autoAlpha: 1}, '-=1.5' )
           .set('.home-container .services-items-wrapper', {y: 70})
           .set('.home-container .services-item__dynoflex', {opacity: 0.2, scale: 1})
           .set('.home-container .services-item__restorfx', {scale: 1.5, autoAlpha: 1})
@@ -2587,340 +2592,9 @@ export default {
 
   },
   methods: {
-    initMap(){
-      this.map = new window.google.maps.Map(document.querySelector('.google_map'), {
-        center: {
-          lat: 41.9770496,
-          lng: -87.9649508
-        },
-        zoom: 11,
-        styles: [{
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#212121"
-            }]
-          },
-          {
-            "elementType": "labels.icon",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          },
-          {
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-              "color": "#212121"
-            }]
-          },
-          {
-            "featureType": "administrative",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "administrative.country",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#9e9e9e"
-            }]
-          },
-          {
-            "featureType": "administrative.land_parcel",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          },
-          {
-            "featureType": "administrative.locality",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#bdbdbd"
-            }]
-          },
-          {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#181818"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#616161"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-              "color": "#1b1b1b"
-            }]
-          },
-          {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "#2c2c2c"
-            }]
-          },
-          {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#8a8a8a"
-            }]
-          },
-          {
-            "featureType": "road.arterial",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#373737"
-            }]
-          },
-          {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#3c3c3c"
-            }]
-          },
-          {
-            "featureType": "road.highway.controlled_access",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#4e4e4e"
-            }]
-          },
-          {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#616161"
-            }]
-          },
-          {
-            "featureType": "transit",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#000000"
-            }]
-          },
-          {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#3d3d3d"
-            }]
-          }
-        ]
-      });
-      this.marker = new window.google.maps.Marker({
-        map: this.map,
-        position: new window.google.maps.LatLng(41.9770496,-87.9649508),
-        // title: "Hello WOrld",
-        icon: {
-          url: '/assets/img/map-marker.svg',
-          scaledSize: {width: 33, height: 33},
-          labelOrigin: {x: 16, y: -10}
-        },
-        clickable: true
-      })
-      this.infowindow = new window.google.maps.InfoWindow({
-        content: "Restor FX",
-        backgroundColor: 'rgb(57,57,57)',
-      });
-      this.infowindow.open(this.map, this.marker);
-      this.mobileMap = new window.google.maps.Map(document.querySelector('.map-map'), {
-        center: {
-          lat: 41.9770496,
-          lng: -88.2451022
-        },
-        zoom: 11,
-        styles: [{
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#212121"
-            }]
-          },
-          {
-            "elementType": "labels.icon",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          },
-          {
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-              "color": "#212121"
-            }]
-          },
-          {
-            "featureType": "administrative",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "administrative.country",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#9e9e9e"
-            }]
-          },
-          {
-            "featureType": "administrative.land_parcel",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          },
-          {
-            "featureType": "administrative.locality",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#bdbdbd"
-            }]
-          },
-          {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#181818"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#616161"
-            }]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-              "color": "#1b1b1b"
-            }]
-          },
-          {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "#2c2c2c"
-            }]
-          },
-          {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#8a8a8a"
-            }]
-          },
-          {
-            "featureType": "road.arterial",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#373737"
-            }]
-          },
-          {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#3c3c3c"
-            }]
-          },
-          {
-            "featureType": "road.highway.controlled_access",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#4e4e4e"
-            }]
-          },
-          {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#616161"
-            }]
-          },
-          {
-            "featureType": "transit",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#757575"
-            }]
-          },
-          {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#000000"
-            }]
-          },
-          {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-              "color": "#3d3d3d"
-            }]
-          }
-        ]
-      });
-      this.mobileMarker =new window.google.maps.Marker({
-        map: this.mobileMap,
-        position:new window.google.maps.LatLng(41.9770496,-87.9649508),
-        icon: {
-          url: '/assets/img/map-marker.svg',
-          scaledSize: {width: 33, height: 33},
-          labelOrigin: {x: 16, y: -10}
-        },
-        clickable: true
-      })
-      this.mobileInfowindow = new window.google.maps.InfoWindow({
-        content: "Restor FX",
-        backgroundColor: 'rgb(57,57,57)',
-      });
-      this.mobileInfowindow.open(this.mobileMap, this.mobileMarker);
-      this.infowindow.open(this.map, this.marker);
-
+    openLightboxOnSlide: function(number) {
+      this.slide = number+1;
+      this.toggler = !this.toggler;
     },
     editReviewsSlider() {
       for(let i = 0; i < this.wpData.feedback_reviews.length; i+=2){
@@ -3019,8 +2693,8 @@ export default {
     },
 
     getWordpressData(){
-      // fetch("https://admin.restor-chicago.com/wp-json/markers/v1/post", {
-      fetch("http://sub.restor.server/wp-json/markers/v1/post", {
+      fetch("https://admin.restor-chicago.com/wp-json/markers/v1/post", {
+      // fetch("http://sub.restor.server/wp-json/markers/v1/post", {
         method: 'GET',
         // body: formData
       })

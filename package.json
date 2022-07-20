@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "fslightbox-vue": "^2.0.1",
     "google-maps": "^4.3.3",
     "gsap": "^3.10.4",
     "image-compare-viewer": "^1.5.0",
