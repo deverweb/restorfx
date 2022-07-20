@@ -953,7 +953,7 @@
       
       :slide="slide"
       :toggler="toggler"
-      :sources="certificates"
+      :sources="full_certificates"
     />
   </div>
 
@@ -1120,6 +1120,12 @@ export default {
       './assets/img/cert/cert_2.png',
       './assets/img/cert/cert_3.png',
       './assets/img/cert/cert_4.png'
+    ],
+    full_certificates: [
+      './assets/img/cert/cert_full_1.png',
+      './assets/img/cert/cert_full_2.png',
+      './assets/img/cert/cert_full_3.png',
+      './assets/img/cert/cert_full_4.png'
     ],
     isFetching: true,
     toggler: false,
@@ -2702,7 +2708,6 @@ export default {
         return data.json();
       })
       .then(response => {
-        console.log(response)
         this.wpData = response;
         this.editReviewsSlider();
       })
